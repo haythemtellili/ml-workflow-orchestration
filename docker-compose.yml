@@ -1,4 +1,6 @@
+version: "3.9"
 services:
+  # PostgreSQL Database
   pgdatabase:
     image: "postgres:${POSTGRES_VERSION}"
     environment:
@@ -9,6 +11,8 @@ services:
       - "./postgres_data:/var/lib/postgresql/data:rw"
     ports:
       - "5433:5432"
+
+  # pgadmin
   pgadmin:
     image: dpage/pgadmin4
     environment:
@@ -18,3 +22,15 @@ services:
       - "./data_pgadmin:/var/lib/pgadmin"
     ports:
       - "8080:80"
+
+  # Prefect Orion API
+  orion:
+    image: prefecthq/prefect:2-python3.10
+    restart: always
+    volumes:
+      - ./prefect:/root/.prefect
+    entrypoint: ["prefect", "orion", "start"]
+    environment:
+      - PREFECT_ORION_API_HOST=0.0.0.0
+    ports:
+      - 4200:4200

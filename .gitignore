@@ -3,5 +3,6 @@ __pycache__/
 .ipynb_checkpoints/
 data_pgadmin
 postgres_data
+prefect
 *.ipynb
 *.csv

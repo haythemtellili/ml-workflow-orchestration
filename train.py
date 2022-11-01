@@ -2,7 +2,6 @@ from datetime import timedelta
 
 import numpy as np
 import pandas as pd
-from prefect import flow, get_run_logger, task
 from prefect.tasks import task_input_hash
 from sklearn import preprocessing
 from sklearn.ensemble import GradientBoostingRegressor
@@ -11,6 +10,7 @@ from sklearn.model_selection import train_test_split
 from sqlalchemy import create_engine
 
 import config
+from prefect import flow, get_run_logger, task
 
 
 def dummify_dataset(df: pd.DataFrame, column: str):
